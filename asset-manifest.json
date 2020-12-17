@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/ais/static/css/main.f2599e19.chunk.css",
+    "main.js": "/ais/static/js/main.06043d4d.chunk.js",
+    "runtime-main.js": "/ais/static/js/runtime-main.02388ea2.js",
+    "static/js/2.d3bcb8fe.chunk.js": "/ais/static/js/2.d3bcb8fe.chunk.js",
+    "static/js/3.21b26bad.chunk.js": "/ais/static/js/3.21b26bad.chunk.js",
+    "index.html": "/ais/index.html",
+    "static/js/2.d3bcb8fe.chunk.js.LICENSE.txt": "/ais/static/js/2.d3bcb8fe.chunk.js.LICENSE.txt",
+    "static/media/akademis.ed1856e1.png": "/ais/static/media/akademis.ed1856e1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.02388ea2.js",
+    "static/js/2.d3bcb8fe.chunk.js",
+    "static/css/main.f2599e19.chunk.css",
+    "static/js/main.06043d4d.chunk.js"
+  ]
+}
