@@ -15,6 +15,10 @@ const Countdown = ({endTime}) => {
             };
             setTimeLeft(time)
         }
+
+        else {
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        }
     }
 
     useEffect(() => {

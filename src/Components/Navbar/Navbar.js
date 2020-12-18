@@ -1,41 +1,38 @@
 import React, { useState } from 'react';
 
-const Navbar = () => {
+import Logo from './akademis.png'
+
+const Navbar = (props) => {
     let [menuOpened, setMenuOpened] = useState(false)
 
     const clickHandler = () => {
         setMenuOpened(!menuOpened)
     }
 
+    const darkHandler = () => {
+        props.darkHandler[0](!props.darkHandler[1])
+        localStorage.setItem('darkMode', !props.darkHandler[1])
+    }
+
     return (
-        <nav className="bg-gray-900">
+        <nav className="bg-gray-200 dark:bg-gray-900 transition">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-16">
-                    <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                        <button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false" onClick={clickHandler}>
-                        <span className="sr-only">Open main menu</span>
-                        <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <svg className="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                        </button>
+                    <div className="flex-1 flex items-center justify-center sm:justify-start">
+                        <img src={Logo} className='h-10 mr-4'></img>
+                        <p className="font-sans font-bold light:text-black dark:text-white transition">Chronos AIS</p>
                     </div>
-                    <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                        
+                    <div className="flex-1 flex items-center justify-end">
+                        <p className={'dark:text-white transition'}>Dark Mode</p>
+                        <div className="w-8 py-1 ml-5 relative my-1 cursor-pointer">    
+                            <div className={`h-5 bg-gray-300 dark:bg-gray-600 rounded-full`} onClick={darkHandler}>
+                                <div className="-ml-3 dark:ml-3 w-6 h-6 absolute transition-all transform ease-linear duration-100 flex items-center justify-center rounded-full bg-white dark:bg-blue-400 shadow-toggle border-gray-300 top-0 left-4 top-a-bit"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div className={`${menuOpened ? '' : 'hidden'} sm:hidden`}>
-                <div className="px-2 pt-2 pb-3 space-y-1">
-                    <a href="#" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-                    <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
-                </div>
-            </div>
+            
         </nav>
     )    
 }
