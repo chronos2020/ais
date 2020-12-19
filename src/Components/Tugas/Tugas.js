@@ -125,14 +125,11 @@ const Tugas = ({filterMode, search, saveTrigger}) => {
     
 
 
-
     return (
-        <div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 grid-flow-row gap-6 p-5">
-                {sortHandler(sortMode, filterHandler(filterMode, search)).map((item) => {
-                    return <Card data={item} title={item['nama pr']} jurusan={item.jurusan} subtitle={item['nama matkul']} description={item.deskripsi} endDate={Date.parse(item.tanggal_selesai)} materi={item.materi} link_scele={item.link_scele} kelas={item.kelas} saveHandler={saveHandler} isSaved={isSaved} savedArray={saved} key={item.no} />
-                })}
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-6 p-3 lg:p-5">
+            {sortHandler(sortMode, filterHandler(filterMode, search)).map((item) => {
+                return <Card data={item} title={item['nama pr']} jurusan={item.jurusan} subtitle={item['nama matkul']} description={item.deskripsi} endDate={Date.parse(item.tanggal_selesai)} materi={item.materi} link_scele={item.link_scele} kelas={item.kelas} saveHandler={saveHandler} isSaved={isSaved} savedArray={saved} key={item.no} />
+            })}
         </div>
     )
     

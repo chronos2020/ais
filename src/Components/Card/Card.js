@@ -16,6 +16,7 @@ const returnColor = (jurusan) => {
 
 const Card = ({data, title, subtitle, description, endDate, jurusan, materi, link_scele, kelas, saveHandler, isSaved, }) => {
     let [saved, setSaved] = useState(false)
+    let [date, setDate] = useState(new Date(endDate).toLocaleString('en-GB'))
 
     useEffect(async() => {
         setSaved(await isSaved(data))
@@ -28,7 +29,7 @@ const Card = ({data, title, subtitle, description, endDate, jurusan, materi, lin
                     <p className="dark:text-white font-sans font-bold text-xl transition" id="card-title">{title}</p>
                     <p className="dark:text-white font-sans font-medium text-md transition" id="card-subtitle">{subtitle} - {kelas}</p>
                     <p className="dark:text-white font-sans font-medium text-sm transition" id="card-subtitle">{materi}</p>
-                    <p className="dark:text-white font-sans font-medium text-sm transition" id="card-subtitle">{}</p>
+                    <p className="text-red-600 dark:text-red-500 font-sans font-medium text-sm transition" id="card-subtitle">Deadline: {date}</p>
                 </div>
 
                 <div className="p-5 pb-5 bg-gray-200 dark:bg-gray-900 rounded-md rounded-t-none rounded-b-none flex-grow transition select-none">
@@ -42,7 +43,7 @@ const Card = ({data, title, subtitle, description, endDate, jurusan, materi, lin
                     </div>
                 </a>
                 <div className="px-5 py-3 select-none cursor-pointer bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800 hover:bg-gray-300 rounded-md rounded-t-none text-center flex justify-center transition"  onClick={() => saveHandler(data)}>
-                    { saved ? <p className="text-red-600 dark:text-red-400 transition font-sans font-medium text-sm text-justify">Remove From Saved</p> : <p className="text-blue-600 dark:text-blue-400 transition font-sans font-medium text-sm text-justify">Save</p>}
+                    { saved ? <p className="text-red-600 dark:text-red-500 transition font-sans font-medium text-sm text-justify">Remove From Saved</p> : <p className="text-blue-600 dark:text-blue-400 transition font-sans font-medium text-sm text-justify">Save</p>}
                 </div>
             </div>
         

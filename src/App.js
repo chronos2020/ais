@@ -31,8 +31,11 @@ function App() {
     <div className={`${darkMode ? 'dark' : ''}`}>
       {notificationShown ? <Notification notificationShown={notificationShown}></Notification> : ''}
       <div className="App light:bg-white dark:bg-gray-700 min-h-screen transition">
-        <Navbar darkHandler={[setDarkMode, darkMode]} />
-        <Filterbar onFilterHandler={setFilter} onSearchHandler={setSearch} filterNow={filterCurrent} />
+        <div className="sticky lg:static top-0 z-50">
+          <Navbar darkHandler={[setDarkMode, darkMode]} />
+          <Filterbar onFilterHandler={setFilter} onSearchHandler={setSearch} filterNow={filterCurrent} />
+        </div>
+        
         <div className="container items-center justify-center py-2">
           <Tugas filterMode={filterCurrent} search={search} saveTrigger={setNotificationShown} />
         </div>
