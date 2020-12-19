@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/ais/static/css/main.ac5beb1d.chunk.css",
-    "main.js": "/ais/static/js/main.a9ba3c27.chunk.js",
-    "main.js.map": "/ais/static/js/main.a9ba3c27.chunk.js.map",
+    "main.css": "/ais/static/css/main.870e9f80.chunk.css",
+    "main.js": "/ais/static/js/main.a8e250d5.chunk.js",
+    "main.js.map": "/ais/static/js/main.a8e250d5.chunk.js.map",
     "runtime-main.js": "/ais/static/js/runtime-main.85c514de.js",
     "runtime-main.js.map": "/ais/static/js/runtime-main.85c514de.js.map",
     "static/js/2.cd21fa41.chunk.js": "/ais/static/js/2.cd21fa41.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.0a6ab998.chunk.js": "/ais/static/js/3.0a6ab998.chunk.js",
     "static/js/3.0a6ab998.chunk.js.map": "/ais/static/js/3.0a6ab998.chunk.js.map",
     "index.html": "/ais/index.html",
-    "static/css/main.ac5beb1d.chunk.css.map": "/ais/static/css/main.ac5beb1d.chunk.css.map",
+    "static/css/main.870e9f80.chunk.css.map": "/ais/static/css/main.870e9f80.chunk.css.map",
     "static/js/2.cd21fa41.chunk.js.LICENSE.txt": "/ais/static/js/2.cd21fa41.chunk.js.LICENSE.txt",
     "static/media/akademis.ed1856e1.png": "/ais/static/media/akademis.ed1856e1.png"
   },
   "entrypoints": [
     "static/js/runtime-main.85c514de.js",
     "static/js/2.cd21fa41.chunk.js",
-    "static/css/main.ac5beb1d.chunk.css",
-    "static/js/main.a9ba3c27.chunk.js"
+    "static/css/main.870e9f80.chunk.css",
+    "static/js/main.a8e250d5.chunk.js"
   ]
 }
