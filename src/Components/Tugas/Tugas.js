@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import request from 'request'
-
 import Card from '../Card/Card';
 
-const Tugas = ({filterMode, search}) => {
+const Tugas = ({filterMode, search, saveTrigger}) => {
     let [assignment, setAssignment] = useState([])
     let [sortMode, setSortMode] = useState(0)
     let [saved, setSaved] = useState((localStorage.getItem('saveData') && JSON.parse(localStorage.getItem('saveData'))) || [])
     let [refresh, setRefresh] = useState(false)
 
-    const isSaved = async (item) => {
-        let tempSaved = await saved
-        return tempSaved.some(i => item['no'] == i['no'])
+    const isSaved = (item) => {
+        return saved.some(i => item['no'] === i['no'])
     }
 
     const filterHandler = (filterMode, search) => {
         if (filterMode == 3) {
             return JSON.parse(localStorage.getItem('saveData'))
         }
+        else if (filterMode == 4) {
+            return assignment.filter( i => Date.parse(i.tanggal_selesai) < Date.now())
+        }
         else {
+            const re = new RegExp(search, "i")
             return assignment.filter(i => {
-                const re = new RegExp(search, "i")
                 if (Date.now() < Date.parse(i.tanggal_selesai)) {
                     if (filterMode == 0) {
-                        return i['nama pr'].match(re)
+                        return i['nama pr'] && i['nama matkul'] && (i['nama pr'].match(re) || i['nama matkul'].match(re))
                     }
                     else {
-                        return i.jurusan == filterMode && i['nama pr'].match(re)
+                        return (i['nama pr'] && i['nama matkul'] && i.jurusan == filterMode && (i['nama pr'].match(re) || i['nama matkul'].match(re))) || i.jurusan == 0
                     }
                 }
             })
@@ -74,6 +74,7 @@ const Tugas = ({filterMode, search}) => {
         const reader = require("g-sheets-api");
         const readerOptions = {
             sheetId: process.env.REACT_APP_SHEET_ID,
+            sheetNumber: 4,
             returnAllResults: false,
         };
         
@@ -89,7 +90,8 @@ const Tugas = ({filterMode, search}) => {
 
     const saveHandler = (item) => {
         let tempSaved = saved
-        if (!tempSaved.some(i => i['no'] == item['no'])) {
+        if (!tempSaved.some(i => i['no'] === item['no'])) {
+            saveTrigger(true)
             setRefresh(true)
             tempSaved.push(item)
             setSaved(tempSaved)
@@ -97,11 +99,13 @@ const Tugas = ({filterMode, search}) => {
             setTimeout(() => {
                 setRefresh(false)
             }, 50)
-            
+            setTimeout(() => {
+                saveTrigger(false)
+            }, 2500)
         }
         else {
             setRefresh(true)
-            tempSaved.splice(tempSaved.indexOf(item), 1)
+            tempSaved = tempSaved.filter(i => item.no !== i.no)
             setSaved(tempSaved)
             localStorage.setItem('saveData', JSON.stringify(tempSaved))
             setTimeout(() => {
@@ -110,6 +114,7 @@ const Tugas = ({filterMode, search}) => {
         }
     }
 
+
     useEffect(() => {
             dataHandler()
             const getData = setInterval(() => {
@@ -117,14 +122,17 @@ const Tugas = ({filterMode, search}) => {
             }, 15000);
             return () => clearInterval(getData);
     }, [])
+    
 
 
 
     return (
-        !refresh && <div className="grid grid-cols-1 lg:grid-cols-3 grid-flow-row gap-4 p-5">
-            {sortHandler(sortMode, filterHandler(filterMode, search)).map((item) => {
-                return <Card data={item} title={item['nama pr']} jurusan={item.jurusan} subtitle={item['nama matkul']} description={item.deskripsi} endDate={Date.parse(item.tanggal_selesai)} materi={item.materi} link_scele={item.link_scele} kelas={item.kelas} saveHandler={saveHandler} isSaved={isSaved} savedArray={saved} />
-            })}
+        <div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 grid-flow-row gap-6 p-5">
+                {sortHandler(sortMode, filterHandler(filterMode, search)).map((item) => {
+                    return <Card data={item} title={item['nama pr']} jurusan={item.jurusan} subtitle={item['nama matkul']} description={item.deskripsi} endDate={Date.parse(item.tanggal_selesai)} materi={item.materi} link_scele={item.link_scele} kelas={item.kelas} saveHandler={saveHandler} isSaved={isSaved} savedArray={saved} key={item.no} />
+                })}
+            </div>
         </div>
     )
     

@@ -6,19 +6,13 @@ const Countdown = ({endTime}) => {
 
     let calculateTime = (date) => {
         let difference = +new Date(date) - +new Date(Date.now());
-        if (difference > 0) {
-            let time = {
-              days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-              hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-              minutes: Math.floor((difference / 1000 / 60) % 60),
-              seconds: Math.floor((difference / 1000) % 60)
-            };
-            setTimeLeft(time)
-        }
-
-        else {
-            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-        }
+        let time = {
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((difference / 1000 / 60) % 60),
+            seconds: Math.floor((difference / 1000) % 60)
+        };
+        setTimeLeft(time)
     }
 
     useEffect(() => {
@@ -29,7 +23,7 @@ const Countdown = ({endTime}) => {
     }, [timeLeft, endTime])
 
     return (
-        <div className="countdown p-3 flex justify-center items-center rounded-t-none">
+        <div className="countdown p-3 flex justify-center items-center rounded-t-none bg-gray-200 dark:bg-gray-900 transition">
             <Digits digitType={'Hari'} digitValue={timeLeft['days']} />
             <Digits digitType={'Jam'} digitValue={timeLeft['hours']} />
             <Digits digitType={'Menit'} digitValue={timeLeft['minutes']} />

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { BookmarkOutline } from "@graywolfai/react-heroicons";
 
 const Filterbar = (props) => {
     let [filterOpened, setFilterOpened] = useState(false)
@@ -19,17 +20,19 @@ const Filterbar = (props) => {
 
     return (
         <nav className="bg-gray-100 dark:bg-gray-800 transition">
-            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-                <div className="relative flex flex-col sm:flex-row items-center justify-between min-h-8">
-                    <div className="flex-1 flex flex-col sm:flex-row items-center justify-center sm:items-stretch sm:justify-start py-3">
-                        <p className="py-2 px-4 text-black dark:text-white transition">Filter Jurusan:</p>
-                        <a className={`cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-4 py-2 text-sm font-bold text-purple-500 hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 0 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition`} role="menuitem" onClick={() => filterHandler(0)}>Semua Jurusan</a>
-                        <a className={`cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-4 py-2 text-sm font-bold text-pink-500 hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 1 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition`} role="menuitem" onClick={() => filterHandler(1)}>Ilmu Komputer</a>
-                        <a className={`cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-4 py-2 text-sm font-bold text-blue-500 hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 2 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition`} role="menuitem" onClick={() => filterHandler(2)}>Sistem Informasi</a>
-                        <a className={`cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-4 py-2 text-sm font-bold text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 3 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition`} role="menuitem" onClick={() => filterHandler(3)}>Saved</a>
+            <div className="max-w-7xl mx-auto">
+                <div className="relative flex flex-col md:flex-row-reverse items-center justify-between min-h-8 px-2">
+                    
+                    <div className="flex-1 flex flex-row items-center justify-center md:items-stretch md:justify-end py-3">
+                        <input type="search" className="bg-gray-300 dark:bg-gray-700 text-white shadow rounded p-2 transition h-10 my-auto" placeholder="search tugas/matkul" onChange={(e) => searchHandler(e)} />
+                        <BookmarkOutline className={`h-8 w-8 text-black dark:text-white mx-2 my-2 hover:fill-current cursor-pointer hidden md:block transition ${filterCurrent == 3 ? 'fill-current' : ''}`} onClick={() => filterHandler(3)}></BookmarkOutline>
                     </div>
-                    <div className="flex-1 flex flex-col sm:flex-row items-center justify-center sm:items-stretch sm:justify-end py-3">
-                        <input type="search" className="bg-gray-300 dark:bg-gray-700 text-white shadow rounded p-2 transition" placeholder="search tugas" onChange={(e) => searchHandler(e)} />
+                    <div className="flex-1 flex flex-col md:flex-row items-center justify-center md:items-stretch md:justify-start pb-3 md:py-3">
+                        <a className={`block md:hidden cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-2 py-2 text-sm font-bold dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 3 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition my-1 md:my-0`} role="menuitem" onClick={() => filterHandler(3)}>Saved</a>
+                        <a className={`cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-2 py-2 text-sm font-bold text-purple-500 hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 0 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition my-1 md:my-0`} role="menuitem" onClick={() => filterHandler(0)}>Semua Jurusan</a>
+                        <a className={`cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-2 py-2 text-sm font-bold text-pink-500 hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 1 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition my-1 md:my-0`} role="menuitem" onClick={() => filterHandler(1)}>Ilmu Komputer</a>
+                        <a className={`cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-2 py-2 text-sm font-bold text-blue-500 hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 2 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition my-1 md:my-0`} role="menuitem" onClick={() => filterHandler(2)}>Sistem Informasi</a>
+                        <a className={`cursor-pointer inline-flex items-center justify-center rounded-lg mx-2 px-2 py-2 text-sm font-bold text-gray-500 hover:bg-gray-300 dark:hover:bg-gray-700 ${filterCurrent == 4 ? 'bg-gray-300 dark:bg-gray-700' : ''} transition my-1 md:my-0`} role="menuitem" onClick={() => filterHandler(4)}>Finished</a>
                     </div>
                 </div>
             </div>

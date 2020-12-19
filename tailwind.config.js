@@ -15,7 +15,9 @@ module.exports = {
   },
   variants: {
     extend: {
-      margin: ['dark']
+      margin: ['dark'],
+      fill: ['hover'],
+      display: ['dark']
     },
   },
   plugins: [],
