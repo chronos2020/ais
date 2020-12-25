@@ -16,17 +16,18 @@ const Tugas = ({filterMode, search, saveTrigger}) => {
             return JSON.parse(localStorage.getItem('saveData'))
         }
         else if (filterMode == 4) {
-            return assignment.filter( i => Date.parse(i.tanggal_selesai) < Date.now())
+            return assignment.filter( i => Date.parse(i.TANGGAL_SELESAI) < Date.now())
         }
         else {
             const re = new RegExp(search, "i")
             return assignment.filter(i => {
-                if (Date.now() < Date.parse(i.tanggal_selesai)) {
+                console.log(i)
+                if (Date.now() < Date.parse(i.TANGGAL_SELESAI)) {
                     if (filterMode == 0) {
-                        return i['nama pr'] && i['nama matkul'] && (i['nama pr'].match(re) || i['nama matkul'].match(re))
+                        return i['NAMA PR'] && i['NAMA MATKUL'] && (i['NAMA PR'].match(re) || i['NAMA MATKUL'].match(re))
                     }
                     else {
-                        return (i['nama pr'] && i['nama matkul'] && i.jurusan == filterMode && (i['nama pr'].match(re) || i['nama matkul'].match(re))) || i.jurusan == 0
+                        return (i['NAMA PR'] && i['NAMA MATKUL'] && i.JURUSAN == filterMode && (i['NAMA PR'].match(re) || i['NAMA MATKUL'].match(re))) || i.JURUSAN == 0
                     }
                 }
             })
@@ -38,20 +39,20 @@ const Tugas = ({filterMode, search, saveTrigger}) => {
         switch (sortMode) {
             case 0:
                 return data.sort((a, b) => { 
-                    if (Date.parse(a.tanggal_selesai) > Date.parse(b.tanggal_selesai)) { 
+                    if (Date.parse(a.TANGGAL_SELESAI) > Date.parse(b.TANGGAL_SELESAI)) { 
                         return 1
                     }
-                    else if (Date.parse(a.tanggal_selesai) < Date.parse(b.tanggal_selesai)) {
+                    else if (Date.parse(a.TANGGAL_SELESAI) < Date.parse(b.TANGGAL_SELESAI)) {
                         return -1
                     }
                     return 0;
                 })
             case 1:
                 return data.sort((a, b) => { 
-                    if (a['nama pr'] > b['nama pr']) { 
+                    if (a['NAMA PR'] > b['NAMA PR']) { 
                         return 1
                     }
-                    else if (a['nama pr'] < b['nama pr']) {
+                    else if (a['NAMA PR'] < b['NAMA PR']) {
                         return -1
                     }
                     return 0;
@@ -59,10 +60,10 @@ const Tugas = ({filterMode, search, saveTrigger}) => {
 
             default:
                 return data.sort((a, b) => { 
-                    if (Date.parse(a.tanggal_selesai) > Date.parse(b.tanggal_selesai)) { 
+                    if (Date.parse(a.TANGGAL_SELESAI) > Date.parse(b.TANGGAL_SELESAI)) { 
                         return 1
                     }
-                    else if (Date.parse(a.tanggal_selesai) < Date.parse(b.tanggal_selesai)) {
+                    else if (Date.parse(a.TANGGAL_SELESAI) < Date.parse(b.TANGGAL_SELESAI)) {
                         return -1
                     }
                     return 0;
@@ -128,7 +129,7 @@ const Tugas = ({filterMode, search, saveTrigger}) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-6 p-3 lg:p-5">
             {sortHandler(sortMode, filterHandler(filterMode, search)).map((item) => {
-                return <Card data={item} title={item['nama pr']} jurusan={item.jurusan} subtitle={item['nama matkul']} description={item.deskripsi} endDate={Date.parse(item.tanggal_selesai)} materi={item.materi} link_scele={item.link_scele} kelas={item.kelas} saveHandler={saveHandler} isSaved={isSaved} savedArray={saved} key={item.no} />
+                return <Card data={item} title={item['NAMA PR']} jurusan={item.JURUSAN} subtitle={item['NAMA MATKUL']} description={item.DESKRIPSI} endDate={Date.parse(item.TANGGAL_SELESAI)} materi={item.MATERI} link_scele={item.LINK_SCELE} kelas={item.KELAS} saveHandler={saveHandler} isSaved={isSaved} savedArray={saved} key={item.NO} />
             })}
         </div>
     )
